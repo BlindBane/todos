@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const TodoForm = (props) => (
-  <form>
+  <form onSubmit={props.handleSubmit}>
     <input
       type='text'
       placeholder='Add a new Todo...'
