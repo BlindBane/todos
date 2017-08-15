@@ -37,3 +37,8 @@ ul {
 li {
   list-style-type: none;
 }
+
+.errorMsg {
+  color: green;
+  font-style: italic;
+}
