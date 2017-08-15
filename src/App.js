@@ -1,8 +1,26 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { TodoForm } from './components/todo/todoForm'
 
 class App extends Component {
+  constructor () {
+    super()
+    this.state = {
+      todos: [
+        { id: 1, name: 'Find a pizza hut', isComplete: false },
+        { id: 2, name: 'Order a pizza', isComplete: true },
+        { id: 3, name: 'Eat the pizza', isComplete: false }
+      ],
+      selectedTodo: ''
+    }
+    this.handleInputChange = this.handleInputChange.bind(this)
+  }
+  handleInputChange (event) {
+    this.setState({
+      selectedTodo: event.target.value
+    })
+  }
   render () {
     return (
       <div className='App'>
@@ -11,15 +29,15 @@ class App extends Component {
           <h2>React Todo's</h2>
         </div>
         <div className='Todo-app'>
-          <form>
-            <div className='Todo-list'>
-              <ul>
-                <li><input type='checkbox' />Find a pizza hut</li>
-                <li><input type='checkbox' />Order a pizza</li>
-                <li><input type='checkbox' />Eat the pizza</li>
-              </ul>
-            </div>
-          </form>
+          <TodoForm selectedTodo={this.state.selectedTodo} handleInputChange={this.handleInputChange} />
+          <div className='Todo-list'>
+            <ul>
+              { this.state.todos.map(todo =>
+                <li key={todo.id} >
+                  <input type='checkbox' defaultChecked={todo.isComplete} />{ todo.name }
+                </li>) }
+            </ul>
+          </div>
         </div>
       </div>
     )
