@@ -5,9 +5,7 @@ import { TodoForm, TodoList, InputError } from './components/todo/index'
 import { addTodo, newId } from './lib/todoHelpers'
 
 class App extends Component {
-  constructor () {
-    super()
-    this.state = {
+    state = {
       todos: [
         { id: 1, name: 'Find a pizza hut', isComplete: false },
         { id: 2, name: 'Order a pizza', isComplete: true },
@@ -15,16 +13,12 @@ class App extends Component {
       ],
       selectedTodo: ''
     }
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this)
-  }
-  handleInputChange (event) {
+  handleInputChange = (event) => {
     this.setState({
       selectedTodo: event.target.value
     })
   }
-  handleSubmit (event) {
+  handleSubmit = (event) => {
     event.preventDefault()
     const newTodo = {
       id: newId(),
@@ -38,7 +32,7 @@ class App extends Component {
       inputErrorMsg: ''
     })
   }
-  handleInvalidSubmit (event) {
+  handleInvalidSubmit = (event) => {
     event.preventDefault()
     this.setState({
       inputErrorMsg: 'Please write a todo.'
