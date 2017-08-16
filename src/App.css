@@ -50,3 +50,8 @@ span.Todo-delete a {
 li:hover span.Todo-delete {
   visibility: visible;
 }
+
+.Todo-footer a {
+  padding-left: 2px;
+  padding-right: 2px;
+}
