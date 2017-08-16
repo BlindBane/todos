@@ -4,18 +4,19 @@ import './App.css'
 import { TodoForm, TodoList, InputError, Footer } from './components/todo'
 import { addTodo, newId, findById, toggleTodo, updateTodo, removeTodo, filterTodos } from './lib/todoHelpers'
 import { pipe, partial } from './lib/utils'
+import { loadTodos } from './lib/todoServer'
 
 class App extends Component {
   state = {
-    todos: [
-      { id: 1, name: 'Find a pizza hut', isComplete: false },
-      { id: 2, name: 'Order a pizza', isComplete: true },
-      { id: 3, name: 'Eat the pizza', isComplete: false }
-    ],
+    todos: [],
     selectedTodo: ''
   }
   static contextTypes = {
     route: React.PropTypes.string
+  }
+  componentDidMount() {
+    loadTodos()
+    .then(todos => this.setState({todos}))
   }
   handleInputChange = (event) => {
     this.setState({
