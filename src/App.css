@@ -37,3 +37,16 @@ ul {
 li {
   list-style-type: none;
 }
+
+li span.Todo-delete {
+  visibility: hidden;
+}
+
+span.Todo-delete a {
+  text-decoration: none;
+  color: green;
+}
+
+li:hover span.Todo-delete {
+  visibility: visible;
+}
