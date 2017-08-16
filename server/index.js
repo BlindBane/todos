@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 
-const todos = [
+let todos = [
   {
     id: 1,
     name: 'Get a pizza',
@@ -27,6 +27,16 @@ app.put('/api/todos', function (req, res) {
   todos[todos.findIndex(todo => todo.id === copy.id)] = copy
 
   res.json('Todo updated!')
+})
+
+app.delete('/api/todos', function (req, res) {
+  var doomedTodoIndex = todos.findIndex(todo => todo.id === req.body.id)
+  todos = [
+    ...todos.slice(0, doomedTodoIndex),
+    ...todos.slice(doomedTodoIndex + 1)
+  ]
+  console.log(todos)
+  res.json('Todo Delted!')
 })
 
 app.listen(1337, function () {

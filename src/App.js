@@ -4,7 +4,7 @@ import './App.css'
 import { TodoForm, TodoList, InputError, Footer } from './components/todo'
 import { addTodo, newId, findById, toggleTodo, updateTodo, removeTodo, filterTodos } from './lib/todoHelpers'
 import { pipe, partial } from './lib/utils'
-import { loadTodos, postNewTodo, putTodo } from './lib/todoServer'
+import { loadTodos, postNewTodo, putTodo, deleteTodo } from './lib/todoServer'
 
 class App extends Component {
   state = {
@@ -58,10 +58,12 @@ class App extends Component {
   }
   handleRemove = (id, event) => {
     event.preventDefault()
+    const doomedTodo = findById(id, this.state.todos)
     const updatedTodos = removeTodo(this.state.todos, id)
     this.setState({
       todos: updatedTodos
     })
+    deleteTodo(doomedTodo).then(res => this.showTmpMessage('Todo deleted!'))
   }
   showTmpMessage = (msg) => {
     this.setState({message: msg})

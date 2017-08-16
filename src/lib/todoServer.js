@@ -27,3 +27,15 @@ export const putTodo = (todo) => {
   })
   .then(res => res.json())
 }
+
+export const deleteTodo = (todo) => {
+  return fetch(`${baseUrl}`, {
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(todo)
+  })
+  .then(res => res.json())
+}
