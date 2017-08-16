@@ -11,7 +11,7 @@ export const postNewTodo = (todo) => {
       'Accept': 'application/json',
       'content-type': 'application/json'
     },
-    body: todo
+    body: JSON.stringify(todo)
   })
   .then(res => res.json())
 }
