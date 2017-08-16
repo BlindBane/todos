@@ -4,7 +4,7 @@ import './App.css'
 import { TodoForm, TodoList, InputError, Footer } from './components/todo'
 import { addTodo, newId, findById, toggleTodo, updateTodo, removeTodo, filterTodos } from './lib/todoHelpers'
 import { pipe, partial } from './lib/utils'
-import { loadTodos } from './lib/todoServer'
+import { loadTodos, postNewTodo } from './lib/todoServer'
 
 class App extends Component {
   state = {
@@ -36,6 +36,9 @@ class App extends Component {
       selectedTodo: '',
       inputErrorMsg: ''
     })
+    postNewTodo(JSON.stringify(newTodo)).then(res => console.log('New Todo Added!'))
+    loadTodos()
+    .then(todos => this.setState({todos}))
   }
   handleInvalidSubmit = (event) => {
     event.preventDefault()

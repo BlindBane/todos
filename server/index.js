@@ -10,7 +10,8 @@ const todos = [
   }
 ]
 
-app.use('/', express.static('public'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 app.get('/api/todos', function (req, res) {
   res.json(todos)
@@ -18,7 +19,7 @@ app.get('/api/todos', function (req, res) {
 
 app.post('/api/todos', function (req, res) {
   todos.push(req.body)
-  res.send('Todo added!')
+  res.send('Todo Added!')
 })
 
 app.listen(1337, function () {
