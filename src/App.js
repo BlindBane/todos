@@ -36,7 +36,7 @@ class App extends Component {
       selectedTodo: '',
       inputErrorMsg: ''
     })
-    postNewTodo(JSON.stringify(newTodo)).then(res => console.log('New Todo Added!'))
+    postNewTodo(newTodo).then(res => console.log('New Todo Added!'))
     loadTodos()
     .then(todos => this.setState({todos}))
   }
