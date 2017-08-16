@@ -6,10 +6,11 @@ export const TodoList = (props) => {
     <div className='Todo-list'>
       <ul>
         { props.todos.map(todo =>
-          <TodoItem
-            key={todo.id}
+          <TodoItem key={todo.id}
+            id={todo.id}
             isComplete={todo.isComplete}
             name={todo.name}
+            handleToggle={props.handleToggle}
           />)
         }
       </ul>
