@@ -19,7 +19,7 @@ app.get('/api/todos', function (req, res) {
 
 app.post('/api/todos', function (req, res) {
   todos.push(req.body)
-  res.send('Todo Added!')
+  res.json('Todo Added!')
 })
 
 app.listen(1337, function () {

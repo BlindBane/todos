@@ -38,8 +38,7 @@ class App extends Component {
       selectedTodo: '',
       inputErrorMsg: ''
     })
-    postNewTodo(newTodo).then(() => this.showTmpMessage('Todo Added!'))
-
+    postNewTodo(newTodo).then((res) => this.showTmpMessage('Todo Added!'))
   }
   handleInvalidSubmit = (event) => {
     event.preventDefault()
@@ -76,6 +75,7 @@ class App extends Component {
         </div>
         <div className='Todo-app'>
           {this.state.inputErrorMsg && <InputError inputErrorMsg={this.state.inputErrorMsg} />}
+          {this.state.message && <span className='Todo-added'>{this.state.message}</span>}
           <TodoForm
             selectedTodo={this.state.selectedTodo}
             handleInputChange={this.handleInputChange}
