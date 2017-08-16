@@ -9,7 +9,9 @@ import { loadTodos, postNewTodo } from './lib/todoServer'
 class App extends Component {
   state = {
     todos: [],
-    selectedTodo: ''
+    selectedTodo: '',
+    inputErrorMsg: '',
+    message: ''
   }
   static contextTypes = {
     route: React.PropTypes.string
@@ -30,15 +32,14 @@ class App extends Component {
       name: this.state.selectedTodo,
       isComplete: false
     }
-    const updatedTodos = addTodo(this.state.todos, newTodo)
+    let updatedTodos
     this.setState({
-      todos: updatedTodos,
+      todos: (updatedTodos = addTodo(this.state.todos, newTodo), updatedTodos),
       selectedTodo: '',
       inputErrorMsg: ''
     })
-    postNewTodo(newTodo).then(res => console.log('New Todo Added!'))
-    loadTodos()
-    .then(todos => this.setState({todos}))
+    postNewTodo(newTodo).then(() => this.showTmpMessage('Todo Added!'))
+
   }
   handleInvalidSubmit = (event) => {
     event.preventDefault()
@@ -59,6 +60,10 @@ class App extends Component {
     this.setState({
       todos: updatedTodos
     })
+  }
+  showTmpMessage = (msg) => {
+    this.setState({message: msg})
+    setTimeout(() => this.setState({message: ''}), 1773)
   }
   render () {
     const submitHandler = this.state.selectedTodo ? this.handleSubmit : this.handleInvalidSubmit
