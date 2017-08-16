@@ -55,3 +55,7 @@ li:hover span.Todo-delete {
   padding-left: 2px;
   padding-right: 2px;
 }
+
+.Todo-footer a.active {
+  font-weight: bold;
+}
