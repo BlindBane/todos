@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { TodoForm, TodoList, InputError, Footer } from './components/todo'
-import { addTodo, newId, findById, toggleTodo, updateTodo, removeTodo } from './lib/todoHelpers'
+import { addTodo, newId, findById, toggleTodo, updateTodo, removeTodo, filterTodos } from './lib/todoHelpers'
 import { pipe, partial } from './lib/utils'
 
 class App extends Component {
@@ -13,6 +13,9 @@ class App extends Component {
       { id: 3, name: 'Eat the pizza', isComplete: false }
     ],
     selectedTodo: ''
+  }
+  static contextTypes = {
+    route: React.PropTypes.string
   }
   handleInputChange = (event) => {
     this.setState({
@@ -55,6 +58,7 @@ class App extends Component {
   }
   render () {
     const submitHandler = this.state.selectedTodo ? this.handleSubmit : this.handleInvalidSubmit
+    const displayTodos = filterTodos(this.state.todos, this.context.route)
     return (
       <div className='App'>
         <div className='App-header'>
@@ -71,7 +75,7 @@ class App extends Component {
           <TodoList 
             handleToggle={this.handleToggle} 
             handleRemove={this.handleRemove}
-            todos={this.state.todos} 
+            todos={displayTodos} 
           />
           <Footer />
         </div>
