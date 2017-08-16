@@ -15,3 +15,15 @@ export const postNewTodo = (todo) => {
   })
   .then(res => res.json())
 }
+
+export const putTodo = (todo) => {
+  return fetch(`${baseUrl}`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(todo)
+  })
+  .then(res => res.json())
+}

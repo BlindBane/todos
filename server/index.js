@@ -22,6 +22,13 @@ app.post('/api/todos', function (req, res) {
   res.json('Todo Added!')
 })
 
+app.put('/api/todos', function (req, res) {
+  var copy = req.body
+  todos[todos.findIndex(todo => todo.id === copy.id)] = copy
+
+  res.json('Todo updated!')
+})
+
 app.listen(1337, function () {
   console.log('Example app listening on port 1337!')
 })
